@@ -451,6 +451,16 @@ python tracker.py list --stage IDEATION
 
 **You’re set.** This gives you a lightweight, automation-friendly spine to populate Canva/CapCut and your posting scheduler from one source of truth.
 
+### Simple GUI
+
+Run a basic desktop interface with:
+
+```bash
+python launcher.py
+```
+
+The GUI lets you view existing album IDs and add new albums without using the command line.
+
 
 ## Developer Instructions
 
