@@ -55,6 +55,17 @@ def upsert_album(db: Dict, album_dict: Dict) -> None:
         db["albums"].append(album_dict)
 
 
+def remove_album(db: Dict, album_id: str) -> bool:
+    """Remove album with matching id from database.
+
+    Returns True if removed, False if not found."""
+    album = find_album(db, album_id)
+    if album:
+        db["albums"].remove(album)
+        return True
+    return False
+
+
 def snapshot(db_path: str) -> Path:
     db = load_db(db_path)
     snap_dir = Path(db_path).parent / "snapshots"
