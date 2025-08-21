@@ -4,7 +4,7 @@ sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 import json
 from pathlib import Path
 
-from storage import generate_id, load_db, save_db, find_album, upsert_album
+from storage import generate_id, load_db, save_db, find_album, upsert_album, remove_album
 
 
 def test_generate_id_slug():
@@ -21,3 +21,13 @@ def test_load_save(tmp_path):
     save_db(str(db_path), db)
     db2 = load_db(str(db_path))
     assert find_album(db2, "1")
+
+
+def test_remove_album(tmp_path):
+    db_path = tmp_path / "db.json"
+    db = load_db(str(db_path))
+    album = {"id": "1", "artist": "A", "album": "B"}
+    upsert_album(db, album)
+    removed = remove_album(db, "1")
+    assert removed
+    assert find_album(db, "1") is None
